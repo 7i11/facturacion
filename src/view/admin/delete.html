@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block css %}{% endblock %}
+{% block content %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="alert alert-danger alert-dismissable">
+            <div style="text-align: center; padding: 100px">
+                <h1>Seguro de eliminar {{ record.id }}?</h1>
+                <p>Esta acci&oacute;n no tendr&aacute; vuelta atras</p>
+                <form name="delete" method="post">
+                    <button type="submit" class="btn red">Eliminar {{ record.id }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}{% endblock %}

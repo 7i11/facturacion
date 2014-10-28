@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/plugins/select2/select2_metro.css" />
+{% endblock %}
+{% block breadcrumb %}
+<h3 class="page-title">
+</h3>
+<ul class="breadcrumb">
+    <li>
+        <i class="icon-home"></i>
+        <a href="/">Inicio</a> 
+        <i class="icon-angle-right"></i>
+    </li>
+    <li>
+        <a href="/admin/producto_list">Productos</a>
+    <i class="icon-angle-right"></i>
+    </li>
+    <li>Crear</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span12">
+<div class="portlet box blue ">
+        <div class="portlet-title">
+            <div class="caption"><i class="icon-reorder"></i>Crear Producto</div>
+            <div class="tools">
+                <a class="collapse" href="javascript:;"></a>
+                <a class="config" data-toggle="modal" href="#portlet-config"></a>
+                <a class="reload" href="javascript:;"></a>
+                <a class="remove" href="javascript:;"></a>
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <!-- BEGIN FORM-->
+            {% if errors %}
+                <ol>
+                {% for error in errors %}
+                    <li><font color=red>{{ error }}</font>
+                {% endfor %}
+                </ol>
+            {% endif %}
+            <form class="form-horizontal form-bordered form-row-stripped" action="" method="POST">
+
+                <div class="control-group">
+                    <label class="control-label">Nombre</label>
+                    <div class="controls">
+                        <input type="text" class="m-wrap span12" name="nombre" value="{{ record.nombre|default_if_none:"" }}" required>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Marca</label>
+                    <div class="controls">
+                        <div class="select2-wrapper">
+                            <select class="span12" name="marca_id" id="marcas">
+                                {% for marca in marcas %}
+                                    <option value="{{ marca.id }}" {% ifequal record.marca.id marca.id %}selected{% endifequal %}>{{ marca.nombre }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Precio</label>
+                    <div class="controls">
+                        <input type="number" step="any" class="m-wrap span12" name="precio" value="{{ record.precio|default_if_none:"" }}" required>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Descripcion</label>
+                    <div class="controls">
+                        <input type="text" class="m-wrap span12" name="descripcion" value="{{ record.descripcion|default_if_none:"" }}">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn blue" type="submit"><i class="icon-ok"></i> Guardar</button>
+                    <button class="btn" type="button">Cancelar</button>
+                </div>
+            </form>
+            <!-- END FORM-->  
+        </div>
+    </div>    
+</div>
+{% endblock %}
+{% block js %}
+    <script type="text/javascript" src="/static/plugins/select2/select2.min.js"></script>
+    <script>
+        $('#marcas').select2();
+    </script>
+{% endblock %}

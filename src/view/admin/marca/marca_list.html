@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="/static/plugins/select2/select2_metro.css" />
+	<link rel="stylesheet" href="/static/plugins/data-tables/DT_bootstrap.css" />
+{% endblock %}
+{% block breadcrumb %}
+<h3 class="page-title">
+</h3>
+<ul class="breadcrumb">
+    <li>
+        <i class="icon-home"></i>
+        <a href="/">Inicio</a> 
+        <i class="icon-angle-right"></i>
+    </li>
+    <li>Marcas</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span12">
+<div class="portlet box red">
+            <div class="portlet-title">
+                <div class="caption"><i class="icon-list"></i>Lista de Marcas</div>
+                <div class="actions">
+                    <a class="btn blue" href="/admin/marca_create"><i class="icon-plus"></i> Agregar</a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-striped table-bordered table-hover" id="TableList">
+                    <thead>
+                        <tr>
+                            <th width="130px"></th>
+                            <th>Nombre</th>
+                            <th>Descripcion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in records %}
+                            <tr>
+                                <td><a class="btn mini red" href="/admin/delete/{{ record.id }}"><i class="icon-trash"></i> Eliminar</a><a class="btn mini yellow" href="/admin/marca_edit/{{ record.id }}"><i class="icon-pencil"></i> Editar</a></td>
+                                <td>{{ record.nombre }}</td>
+                                <td>{{ record.descripcion }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+	<script type="text/javascript" src="/static/plugins/select2/select2.min.js"></script>
+	<script type="text/javascript" src="/static/plugins/data-tables/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="/static/plugins/data-tables/DT_bootstrap.js"></script>
+    <script>
+            $('#TableList').dataTable({
+                "aLengthMenu": [
+                    [5, 15, 20, -1],
+                    [5, 15, 20, "All"]
+                ],
+                "iDisplayLength": 5,
+                "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+                "sPaginationType": "bootstrap",
+                "oLanguage": {
+                    "sEmptyTable": "Esta seccion no contiene registros",
+                    "sInfoEmpty": "0",
+                    "sZeroRecords": "Nada para mostrar",
+                    "sSearch": "Buscar:",
+                    "sInfo": "Mostrando _START_ de _END_ (total _TOTAL_)",
+                    "sInfoFiltered": " - filtrado de  _MAX_ entradas",
+                    "sLengthMenu": "_MENU_ por pagina",
+                    "oPaginate": {
+                        "sPrevious": "Anterior",
+                        "sNext": "Siguiente"
+                    }
+                },
+                "aoColumnDefs": [{
+                        'bSortable': false,
+                        'aTargets': [0]
+                    }
+                ]
+            });
+
+            jQuery('#TableList_wrapper .dataTables_filter input').addClass("m-wrap small");
+            jQuery('#TableList_wrapper .dataTables_length select').addClass("m-wrap small");
+            jQuery('#TableList_wrapper .dataTables_length select').select2();
+
+    </script>
+{% endblock %}

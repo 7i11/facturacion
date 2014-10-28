@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block css %}
+    <link href="/static/css/pages/error.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block breadcrumb %}
+    <h3 class="page-title">
+        404 <small>no encontrado</small>
+    </h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="/inicio/">Inicio</a> 
+            <i class="icon-angle-right"></i>
+        </li>
+        <li><a href="#">404 no encontrado</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="span12 page-404">
+            <div class="number">
+                404
+            </div>
+            <div class="details">
+                <h3>Oops!  Est&aacute;s perdido.</h3>
+                <p>
+                    No pudimos encontrar lo que buscas.<br>
+                    <a href="/inicio/">ve al inicio</a> o intenta buscar el la siguiente barra.
+                </p>
+                <form action="#">
+                    <div class="input-append">                      
+                    <input type="text" placeholder="palabras..." size="16" class="m-wrap">
+                    <button class="btn blue">Buscar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
