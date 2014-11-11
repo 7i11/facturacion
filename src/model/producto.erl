@@ -1,5 +1,6 @@
 -module(producto, [
                 Id,
+                Codigo::string(),
                 Nombre::string(),
                 MarcaId,
                 Precio::float(),
